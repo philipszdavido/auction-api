@@ -14,9 +14,6 @@ export const register = async (req: Request, res: Response) => {
 
     create(username, hashedPassword);
 
-    // const token = signToken({ username, password });
-
-    // res.status(200).json({ token });
     res.status(200).json({ message: "User created" });
   } catch (error) {
     console.error(error);
