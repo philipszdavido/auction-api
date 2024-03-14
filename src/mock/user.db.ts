@@ -15,6 +15,7 @@ export function find(username: string) {
 }
 
 export function create(username: string, hashPassword: string) {
+  if (find(username)) return;
   users.push({ username, hashPassword });
 }
 
