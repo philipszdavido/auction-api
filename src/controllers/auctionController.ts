@@ -4,8 +4,18 @@ export const status = (req: Request, res: Response) => {
   res.json({ message: "Status" });
 };
 
-export const history = (req: Request, res: Response) => {
-  res.json({ message: "History" });
+export const history = async (req: Request, res: Response) => {
+  try {
+    const history = await bidHistory();
+
+    res.status(200).json({
+      message: "Bid history",
+      data: convertBigIntToString(history),
+    });
+  } catch (error) {
+    console.error("Error getting bid history:", error);
+    res.status(500).json({ message: "Error getting bid history", error });
+  }
 };
 
 export const submitBid = async (req: Request, res: Response) => {
