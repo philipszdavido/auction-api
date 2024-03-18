@@ -35,7 +35,7 @@ export const auctionStatus = async () => {
     const auctionStatus = {
       ended,
       beneficiary,
-      pendingReturns,
+      pendingReturns: weiToEther(pendingReturns) + " ETH",
       highestBid: weiToEther(highestBid) + " ETH",
       auctionEndTime: unixTimestampToDateString(auctionEndTime),
       totalBids: bigIntToNumber(totalBids),
