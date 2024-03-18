@@ -31,3 +31,8 @@ export function weiToEther(wei: bigint): number {
   const ether = bigIntToNumber(wei) / 10 ** 18;
   return ether;
 }
+
+export function unixTimestampToDateString(unixTimestamp: bigint): Date {
+  const milliseconds = Number(unixTimestamp);
+  return new Date(milliseconds);
+}
