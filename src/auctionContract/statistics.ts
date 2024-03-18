@@ -1,31 +1,22 @@
+import { weiToEther } from "../utils";
 import { getWeb3Account } from "./contract";
-
-export namespace Statistics {
-  export type TotalBids = {
-    totalBids: number;
-  };
-
-  export type TotalEthVolume = {
-    totalEthVolume: number;
-  };
-}
 
 export const statisticsFn = async () => {
   const { contract } = getWeb3Account();
 
   try {
-    const { totalBids } = (await contract.methods
-      .getTotalBids()
-      .call()) as Statistics.TotalBids;
+    const totalBids = (await contract.methods.getTotalBids().call()) as bigint;
 
-    const { totalEthVolume } = (await contract.methods
+    const totalEthVolume = (await contract.methods
       .getEthVolume()
-      .call()) as Statistics.TotalEthVolume;
+      .call()) as bigint;
 
-    return {
+    const stats = {
       totalBids,
-      totalEthVolume,
+      totalEthVolume: weiToEther(totalEthVolume) + " ETH",
     };
+
+    return stats;
   } catch (error) {
     throw error;
   }
