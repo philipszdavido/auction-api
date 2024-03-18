@@ -64,6 +64,7 @@ contract SimpleAuction {
         }
 
         history.push(Bid(msg.sender, msg.value));
+        totalBids++;
         
         // Update highest bidder and highest bid amount
         highestBidder = msg.sender;
@@ -123,5 +124,8 @@ contract SimpleAuction {
         return history;
     }
 
+    function getTotalBids() public view returns (uint) {
+        return totalBids;
+    }
 
 }
