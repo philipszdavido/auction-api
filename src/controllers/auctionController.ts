@@ -8,8 +8,21 @@ export const history = (req: Request, res: Response) => {
   res.json({ message: "History" });
 };
 
-export const submitBid = (req: Request, res: Response) => {
-  res.json({ message: "Submit bid" });
+export const submitBid = async (req: Request, res: Response) => {
+  const { bid } = req.body;
+  try {
+    const txnReceipt = await submitBidAuction(bid);
+
+    const data = convertBigIntToString(txnReceipt);
+
+    res.status(200).json({
+      message: "Bid submitted successfully",
+      data,
+    });
+  } catch (error) {
+    console.error("Error submitting bid:", error);
+    res.status(500).json({ message: "Error submitting bid", error });
+  }
 };
 
 export const statistics = async (req: Request, res: Response) => {
