@@ -1,4 +1,4 @@
-import Web3 from "web3";
+import Web3, { Transaction } from "web3";
 import artifacts from "../../artifacts/contracts/SimpleAuction.sol/SimpleAuction.json";
 import dotenv from "dotenv";
 
@@ -58,7 +58,7 @@ export const callContractMethod = async (
     const nonce = await web3.eth.getTransactionCount(account);
     const encodedABI = contract.methods[contractMethodName]().encodeABI();
 
-    const txObject = {
+    const txObject: Transaction = {
       from: account,
       to: contractAddress,
       data: encodedABI,
@@ -67,10 +67,8 @@ export const callContractMethod = async (
 
     const gas_estimate = await web3.eth.estimateGas(txObject);
 
-    // @ts-ignore
     txObject.gas = gas_estimate;
 
-    // @ts-ignore
     txObject.gasPrice = web3.utils.toWei("1", "gwei");
 
     const signedTx = await web3.eth.accounts.signTransaction(
