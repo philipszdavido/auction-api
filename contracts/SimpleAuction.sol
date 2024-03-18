@@ -62,6 +62,8 @@ contract SimpleAuction {
         if (highestBid != 0) {
             pendingReturns[highestBidder] += highestBid;
         }
+
+        history.push(Bid(msg.sender, msg.value));
         
         // Update highest bidder and highest bid amount
         highestBidder = msg.sender;
@@ -116,4 +118,10 @@ contract SimpleAuction {
             totalBids
         );
     }
+
+    function getBidHistory() public view returns (Bid[] memory) {
+        return history;
+    }
+
+
 }
