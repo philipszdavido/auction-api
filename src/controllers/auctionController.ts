@@ -1,7 +1,17 @@
 import { Request, Response } from "express";
 
-export const status = (req: Request, res: Response) => {
-  res.json({ message: "Status" });
+export const status = async (req: Request, res: Response) => {
+  try {
+    const status = await auctionStatus();
+
+    res.status(200).json({
+      message: "Auction status",
+      data: convertBigIntToString(status),
+    });
+  } catch (error) {
+    console.error("Error getting auction status:", error);
+    res.status(500).json({ message: "Error getting auction status", error });
+  }
 };
 
 export const history = async (req: Request, res: Response) => {
