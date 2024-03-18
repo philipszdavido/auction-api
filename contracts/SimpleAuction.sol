@@ -65,6 +65,7 @@ contract SimpleAuction {
 
         history.push(Bid(msg.sender, msg.value));
         totalBids++;
+
         totalEthVolume += msg.value;
         
         // Update highest bidder and highest bid amount
@@ -128,9 +129,8 @@ contract SimpleAuction {
     function getTotalBids() public view returns (uint) {
         return totalBids;
     }
-    
-     function getEthVolume() public view returns (uint) {
+
+    function getEthVolume() public view returns (uint) {
         return totalEthVolume;
     }
-
 }
