@@ -8,6 +8,7 @@ export type AuctionStatus = {
   highestBid: bigint;
   auctionEndTime: bigint;
   highestBidder: string;
+  totalBids: bigint;
 };
 
 export const auctionStatus = async () => {
