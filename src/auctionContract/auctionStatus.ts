@@ -1,4 +1,8 @@
-import web3 from "web3";
+import {
+  bigIntToNumber,
+  unixTimestampToDateString,
+  weiToEther,
+} from "../utils";
 import { getWeb3Account } from "./contract";
 
 export type AuctionStatus = {
@@ -19,16 +23,25 @@ export const auctionStatus = async () => {
 
     console.log(status);
 
-    const { ended, beneficiary, pendingReturns, highestBid, auctionEndTime } =
-      status;
-
-    return {
+    const {
       ended,
       beneficiary,
       pendingReturns,
       highestBid,
       auctionEndTime,
+      totalBids,
+    } = status;
+
+    const auctionStatus = {
+      ended,
+      beneficiary,
+      pendingReturns,
+      highestBid: weiToEther(highestBid) + " ETH",
+      auctionEndTime: unixTimestampToDateString(auctionEndTime),
+      totalBids: bigIntToNumber(totalBids),
     };
+
+    return auctionStatus;
   } catch (error) {
     throw error;
   }
