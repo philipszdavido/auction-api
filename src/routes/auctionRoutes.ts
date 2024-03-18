@@ -5,10 +5,12 @@ import {
   history,
   statistics,
 } from "../controllers/auctionController";
+import { verifyTokenMiddleware } from "../middlewares/authMiddleware";
+
 const router = express.Router();
 
-router.get("/status", status);
-router.get("/history", history);
-router.post("/submit-bid", submitBid);
-router.get("statistics", statistics);
+router.get("/status", verifyTokenMiddleware, status);
+router.get("/history", verifyTokenMiddleware, history);
+router.post("/submit-bid", verifyTokenMiddleware, submitBid);
+router.get("/statistics", verifyTokenMiddleware, statistics);
 export default router;
