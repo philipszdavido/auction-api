@@ -18,7 +18,6 @@ export function verifyTokenMiddleware(
     req.body = { ...req.body, decoded };
     next();
   } catch (error) {
-    console.error(error);
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized", data: error });
   }
 }
