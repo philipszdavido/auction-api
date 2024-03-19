@@ -5,21 +5,18 @@ import dotenv from "dotenv";
 export const getNetworkUrl = () => {
   dotenv.config();
 
-  const network = process.env.ETHEREUM_NETWORK;
-  const apiKey = process.env.INFURA_API_KEY;
-  const useLocal = process.env.USE_LOCAL_NODE;
+  try {
+    const network = process.env.ETHEREUM_NETWORK;
 
-  let url = `https://${network}.infura.io/v3/${apiKey}`;
-
-  if (useLocal === "true") {
-    url = `http://localhost:8545`;
+    return network as string;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    return "http://localhost:8545";
   }
-  return url;
 };
 
 export const getWeb3Account = () => {
-  const network = process.env.ETHEREUM_NETWORK;
-  const apiKey = process.env.INFURA_API_KEY;
   const contractAddress = process.env.CONTRACT_ADDRESS;
   const signerKey = process.env.SIGNER_PRIVATE_KEY;
 
@@ -27,21 +24,15 @@ export const getWeb3Account = () => {
 
   const web3 = new Web3(url);
 
-  const contractABI = artifacts.abi;
-
-  const contract = new web3.eth.Contract(contractABI, contractAddress);
+  const contract = new web3.eth.Contract(artifacts.abi, contractAddress);
 
   const signer = web3.eth.accounts.privateKeyToAccount(String(signerKey));
   web3.eth.accounts.wallet.add(signer);
 
-  const privateKey = signer.privateKey;
-
-  const account = signer.address;
-
   return {
     contract,
-    account,
-    privateKey,
+    account: signer.address,
+    privateKey: signer.privateKey,
     contractAddress,
     web3,
   };
