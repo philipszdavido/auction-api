@@ -18,6 +18,12 @@ export const register = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
+    if ((!username && username != "") || (!password && password != "")) {
+      return res.status(400).json({
+        message: "No username or password found",
+      });
+    }
+
     if (username.length < USERNAME_MIN_LENGTH) {
       return res.status(400).json({
         message: `Username is too short. The minimum length is ${USERNAME_MIN_LENGTH}`,
