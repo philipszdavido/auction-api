@@ -2,7 +2,7 @@ import {
   bigIntToNumber,
   unixTimestampToDateString,
   weiToEther,
-} from "../../utils";
+} from "../../../utils";
 
 describe("Utility Function - bigIntToNumber", () => {
   it("should convert bigInt to number within safe range", () => {

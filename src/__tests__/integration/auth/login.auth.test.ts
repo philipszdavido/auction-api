@@ -21,7 +21,10 @@ describe("POST /auth/login", () => {
       password: "password123",
     };
 
-    const response = await request(app).post("/auth/login").send(userData);
+    const response = await request(app)
+      .post("/auth/login")
+      .send(userData)
+      .expect(200);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("token");

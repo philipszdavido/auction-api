@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { register } from "../../controllers/authController";
-import { find, create } from "../../mock/user.db";
+import { register } from "../../../controllers/authController";
+import { find, create } from "../../../mock/user.db";
 
-jest.mock("../../mock/user.db", () => ({
+jest.mock("../../../mock/user.db", () => ({
   find: jest.fn(),
   create: jest.fn(),
 }));

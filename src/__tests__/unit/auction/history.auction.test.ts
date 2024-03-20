@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { history } from "../../controllers/auctionController";
-import { bidHistory } from "../../auctionContract/bidHistory";
+import { history } from "../../../controllers/auctionController";
+import { bidHistory } from "../../../auctionContract/bidHistory";
 
-jest.mock("../../auctionContract/bidHistory");
+jest.mock("../../../auctionContract/bidHistory");
 
 describe("Auction Controller - History", () => {
   let mockRequest: Partial<Request>;

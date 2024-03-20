@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { statistics } from "../../controllers/auctionController";
-import { statisticsFn } from "../../auctionContract/statistics";
+import { statistics } from "../../../controllers/auctionController";
+import { statisticsFn } from "../../../auctionContract/statistics";
 
-jest.mock("../../auctionContract/statistics");
+jest.mock("../../../auctionContract/statistics");
 
 describe("Auction Controller - Statistics", () => {
   let mockRequest: Partial<Request>;

@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword } from "../../utils/auth";
+import { hashPassword, comparePassword } from "../../../utils/auth";
 
 describe("Password Hashing Utility Functions", () => {
   const password = "testPassword";

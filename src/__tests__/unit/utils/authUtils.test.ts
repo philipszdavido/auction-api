@@ -1,5 +1,5 @@
-import { signToken, verifyToken, decodeToken } from "../../utils/auth";
-import { JWT_SECRET } from "../../utils/constants";
+import { signToken, verifyToken, decodeToken } from "../../../utils/auth";
+import { JWT_SECRET } from "../../../utils/constants";
 
 describe("Authentication Utility Functions", () => {
   const payload = { username: "testUser" };

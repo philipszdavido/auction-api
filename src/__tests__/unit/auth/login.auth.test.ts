@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { login } from "../../controllers/authController";
-import { find } from "../../mock/user.db";
-import { comparePassword, signToken } from "../../utils/auth";
+import { login } from "../../../controllers/authController";
+import { find } from "../../../mock/user.db";
+import { comparePassword, signToken } from "../../../utils/auth";
 
-jest.mock("../../mock/user.db", () => ({
+jest.mock("../../../mock/user.db", () => ({
   find: jest.fn(),
 }));
 
-jest.mock("../../utils/auth", () => ({
+jest.mock("../../../utils/auth", () => ({
   comparePassword: jest.fn(),
   signToken: jest.fn(),
 }));

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { submitBid } from "../../controllers/auctionController";
-import { submitBid as submitBidAuction } from "../../auctionContract/submitBid";
+import { submitBid } from "../../../controllers/auctionController";
+import { submitBid as submitBidAuction } from "../../../auctionContract/submitBid";
 
-jest.mock("../../auctionContract/submitBid");
+jest.mock("../../../auctionContract/submitBid");
 
 describe("Auction Controller - Submit Bid", () => {
   let mockRequest: Partial<Request>;
