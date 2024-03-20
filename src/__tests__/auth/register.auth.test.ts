@@ -48,7 +48,7 @@ describe("Authentication Unit Test", () => {
     expect(create).not.toHaveBeenCalled();
     expect(mockResponse.status).toHaveBeenCalledWith(400);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      message: "Invalid username",
+      message: "Username is already taken",
     });
   });
 
