@@ -30,5 +30,25 @@ describe("Authentication Unit Test", () => {
     };
     await register(mockRequest as Request, mockResponse as Response);
     expect(mockResponse.status).toHaveBeenCalledWith(200);
+
+    expect(find).toHaveBeenCalledWith("John");
+    expect(create).toHaveBeenCalledWith("John", expect.any(String));
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.json).toHaveBeenCalledWith({ message: "User created" });
+  });
+
+  it("should return error if username already exists", async () => {
+    (find as jest.Mock).mockReturnValue(true);
+
+    mockRequest.body = { username: "John", password: "password123" };
+
+    await register(mockRequest as Request, mockResponse as Response);
+
+    expect(find).toHaveBeenCalledWith("John");
+    expect(create).not.toHaveBeenCalled();
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      message: "Invalid username",
+    });
   });
 });
