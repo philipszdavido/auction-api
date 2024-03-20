@@ -51,4 +51,34 @@ describe("Authentication Unit Test", () => {
       message: "Invalid username",
     });
   });
+
+  it("should return error if registration fails", async () => {
+    (find as jest.Mock).mockReturnValue(false);
+
+    (create as jest.Mock).mockImplementation(() => {
+      throw new Error("Database error");
+    });
+
+    mockRequest.body = { username: "John", password: "password123" };
+
+    await register(mockRequest as Request, mockResponse as Response);
+
+    expect(find).toHaveBeenCalledWith("John");
+    expect(create).toHaveBeenCalledWith("John", expect.any(String));
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      message: "Invalid username or password",
+    });
+  });
+
+  it("should return error if username or password is missing", async () => {
+    await register(mockRequest as Request, mockResponse as Response);
+
+    expect(find).not.toHaveBeenCalled();
+    expect(create).not.toHaveBeenCalled();
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      message: "Invalid username or password",
+    });
+  });
 });
