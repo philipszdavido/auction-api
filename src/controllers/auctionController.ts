@@ -36,6 +36,11 @@ export const history = async (req: Request, res: Response) => {
 export const submitBid = async (req: Request, res: Response) => {
   const { bid } = req.body;
   try {
+    if (!bid) {
+      return res.status(400).json({
+        message: "There is no bid amount",
+      });
+    }
     const txnReceipt = await submitBidAuction(bid);
 
     const data = convertBigIntToString(txnReceipt);
