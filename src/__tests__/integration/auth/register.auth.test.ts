@@ -2,6 +2,7 @@ import request from "supertest";
 import { create, find } from "../../../mock/user.db";
 import { app } from "../../..";
 import {
+  PASSWORD_MIN_LENGTH,
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from "../../../controllers/authController";
@@ -55,7 +56,7 @@ describe("POST /auth/register", () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty(
       "message",
-      "Invalid username or password"
+      "No username or password found"
     );
   });
 
@@ -69,7 +70,7 @@ describe("POST /auth/register", () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty(
       "message",
-      "Invalid username or password"
+      "No username or password found"
     );
   });
 
@@ -99,7 +100,7 @@ describe("POST /auth/register", () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty(
       "message",
-      "Password Too Short. Minimum lenght is 4"
+      `Password Too Short. Minimum lenght is ${PASSWORD_MIN_LENGTH}`
     );
   });
 
@@ -129,7 +130,7 @@ describe("POST /auth/register", () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty(
       "message",
-      "Password Too Short. Minimum lenght is 4"
+      `Password Too Short. Minimum lenght is ${PASSWORD_MIN_LENGTH}`
     );
   });
 });
