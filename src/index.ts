@@ -5,7 +5,7 @@ import auctionRoutes from "./routes/auctionRoutes";
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
