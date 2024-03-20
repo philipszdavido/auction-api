@@ -1,10 +1,14 @@
 import request from "supertest";
-import { app } from "../../..";
+import { server as app } from "../../..";
 import { comparePassword, signToken } from "../../../utils/auth";
 import { User, find } from "../../../mock/user.db";
 
 jest.mock("../../../mock/user.db");
 jest.mock("../../../utils/auth");
+
+afterAll((done) => {
+  app.close(done);
+});
 
 describe("POST /auth/login", () => {
   it("should login successfully with correct username and password", async () => {

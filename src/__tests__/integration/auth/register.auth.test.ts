@@ -1,11 +1,15 @@
 import request from "supertest";
 import { create, find } from "../../../mock/user.db";
-import { app } from "../../..";
+import { server as app } from "../../..";
 import {
   PASSWORD_MIN_LENGTH,
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from "../../../controllers/authController";
+
+afterAll((done) => {
+  app.close(done);
+});
 
 describe("Integration Test: /register endpoint", () => {
   beforeEach(() => {});
