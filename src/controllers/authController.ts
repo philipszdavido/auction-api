@@ -5,12 +5,12 @@ import { Request, Response } from "express";
 export const register = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-  if (find(username)) {
-    return res.status(400).json({ message: "Invalid username" });
-  }
-
   try {
-    const hashedPassword = await hashPassword(password);
+    if (find(username)) {
+      return res.status(400).json({ message: "Invalid username" });
+    }
+
+    const hashedPassword = await hashPassword(password.toString());
 
     create(username, hashedPassword);
 
