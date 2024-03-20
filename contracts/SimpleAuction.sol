@@ -24,7 +24,7 @@ contract SimpleAuction {
     uint public highestBid;
 
     // Mapping to track pending returns for participants who were outbid
-    mapping(address => uint) pendingReturns;
+    mapping(address => uint) public pendingReturns;
 
     // History to hold all successful bids
     struct Bid {
@@ -39,7 +39,7 @@ contract SimpleAuction {
     uint public totalEthVolume;
 
     // Flag to indicate if the auction has ended
-    bool ended;
+    bool public ended;
 
     // Events to log important actions
     event HighestBidIncreased(address bidder, uint amount);
