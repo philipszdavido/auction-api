@@ -3,9 +3,9 @@ import { comparePassword, hashPassword, signToken } from "../utils/auth";
 import { Request, Response } from "express";
 
 export const register = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-
   try {
+    const { username, password } = req.body;
+
     if (find(username)) {
       return res.status(400).json({ message: "Invalid username" });
     }
@@ -22,9 +22,9 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-
   try {
+    const { username, password } = req.body;
+
     const user = find(username) as User;
 
     if (!user) {
