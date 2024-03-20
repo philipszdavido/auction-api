@@ -4,6 +4,7 @@ import { convertBigIntToString } from "../utils";
 import { auctionStatus } from "../auctionContract/auctionStatus";
 import { bidHistory } from "../auctionContract/bidHistory";
 import { statisticsFn } from "../auctionContract/statistics";
+import { deployEndpoint } from "../auctionContract/deployEndpoint";
 
 export const status = async (req: Request, res: Response) => {
   try {
@@ -66,5 +67,32 @@ export const statistics = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error getting statistics:", error);
     res.status(500).json({ message: "Error getting statistics", error });
+  }
+};
+
+export const deploy = async (req: Request, res: Response) => {
+  try {
+    const { endTime, beneficiaryAddress } = req.body;
+
+    if (!endTime || !beneficiaryAddress) {
+      return res.status(400).json({
+        message: "endTime and beneficiaryAddress are required parameters",
+      });
+    }
+
+    const deployData = await deployEndpoint({
+      endTime,
+      beneficiaryAddress,
+    });
+
+    res.status(200).json({
+      message: "Auction smart contract deployed successfully",
+      data: { auctionContractAddress: deployData },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error deploying contract",
+      error,
+    });
   }
 };
