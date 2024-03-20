@@ -2,7 +2,7 @@ import { find, create, User } from "../mock/user.db";
 import { comparePassword, hashPassword, signToken } from "../utils/auth";
 import { Request, Response } from "express";
 
-export const USERNAME_MAX_LENGTH = 10;
+export const USERNAME_MAX_LENGTH = 15;
 export const USERNAME_MIN_LENGTH = 4;
 
 export const PASSWORD_MIN_LENGTH = 4;
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    if (username.length <= USERNAME_MIN_LENGTH) {
+    if (username.length < USERNAME_MIN_LENGTH) {
       return res.status(400).json({
         message: `Username is too short. The minimum length is ${USERNAME_MIN_LENGTH}`,
       });
@@ -37,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     if (find(username)) {
-      return res.status(400).json({ message: "Invalid username" });
+      return res.status(400).json({ message: "Username is already taken" });
     }
 
     const hashedPassword = await hashPassword(password.toString());
