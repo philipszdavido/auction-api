@@ -13,7 +13,8 @@
     "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost",
     "test:unit": "jest --testPathPattern=__tests__/unit --coverage",
     "test:integration": "jest --testPathPattern=__tests__/integration --runInBand --coverage",
-    "test": "jest --testPathPattern=__tests__/unit --runInBand --coverage & jest --testPathPattern=__tests__/integration --runInBand ----detectOpenHandles --coverage"
+    "test": "jest --testPathPattern=__tests__/unit --runInBand --coverage & jest --testPathPattern=__tests__/integration --runInBand ----detectOpenHandles --coverage",
+    "test:contract": "npx hardhat test"
   },
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
@@ -28,9 +29,11 @@
     "@jest/globals": "^29.7.0",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
     "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomicfoundation/hardhat-ignition": "^0.15.0",
     "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
     "@nomicfoundation/hardhat-verify": "^2.0.5",
+    "@nomicfoundation/ignition-core": "^0.15.0",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/bcrypt": "^5.0.2",
