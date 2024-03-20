@@ -2,9 +2,39 @@ import { find, create, User } from "../mock/user.db";
 import { comparePassword, hashPassword, signToken } from "../utils/auth";
 import { Request, Response } from "express";
 
+export const USERNAME_MAX_LENGTH = 10;
+export const USERNAME_MIN_LENGTH = 4;
+
+export const PASSWORD_MIN_LENGTH = 4;
+export const isUsernameTooLong = (username: string) => {
+  return username.length > USERNAME_MAX_LENGTH;
+};
+
+export const isPassordTooShort = (password: string) => {
+  return password.length < PASSWORD_MIN_LENGTH;
+};
+
 export const register = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
+
+    if (username.length <= USERNAME_MIN_LENGTH) {
+      return res.status(400).json({
+        message: `Username is too short. The minimum length is ${USERNAME_MIN_LENGTH}`,
+      });
+    }
+
+    if (isUsernameTooLong(username)) {
+      return res.status(400).json({
+        message: `Username is too long. The maximum length is ${USERNAME_MAX_LENGTH}`,
+      });
+    }
+
+    if (isPassordTooShort(password)) {
+      return res.status(400).json({
+        message: `Password Too Short. Minimum lenght is ${PASSWORD_MIN_LENGTH}`,
+      });
+    }
 
     if (find(username)) {
       return res.status(400).json({ message: "Invalid username" });
