@@ -4,16 +4,9 @@ import dotenv from "dotenv";
 
 export const getNetworkUrl = () => {
   dotenv.config();
+  const network = process.env.ETHEREUM_NETWORK;
 
-  try {
-    const network = process.env.ETHEREUM_NETWORK;
-
-    return network as string;
-  } catch (error) {
-    console.error(error);
-  } finally {
-    return "http://localhost:8545";
-  }
+  return network as string;
 };
 
 export const getWeb3Account = () => {
