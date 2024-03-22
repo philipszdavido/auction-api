@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    ports:
+      - "3100:3100"
+    command: npm run start
+
+  hardhat:
+    build: .
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "8547:8547"
+    command: npm run start:node
