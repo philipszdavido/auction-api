@@ -216,3 +216,11 @@ curl --location --request POST 'http://localhost:3100/auction/status' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlvdXJfdXNlcm5hbWUiLCJwYXNzd29yZCI6InlvdXJfcGFzc3dvcmQiLCJpYXQiOjE3MTA5NzQzNTgsImV4cCI6MTcxMDk3Nzk1OH0.pLNeECeud8R0XiCyqjbRlSQ96IYhU5lX2fn_kKE9hR4' \
 ```
+
+# Docker
+
+To build the Docker images, simply run:
+
+```
+docker-compose up
+```
