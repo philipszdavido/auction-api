@@ -11,7 +11,7 @@ export const deployEndpoint = async ({
 }) => {
   try {
     dotenv.config();
-    const url = process.env.ETHEREUM_NETWORK_API;
+    const url = process.env.ETHEREUM_NETWORK;
 
     const { bytecode, abi } = artifacts;
 
