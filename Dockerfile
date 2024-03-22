@@ -20,7 +20,8 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+# RUN npm install --only=production
+RUN npm install
 
 COPY --from=build /usr/src/app/dist ./dist
 COPY . .
