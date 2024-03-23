@@ -1,12 +1,12 @@
 import express from "express";
+import { verifyTokenMiddleware } from "../middlewares/authMiddleware";
 import {
   submitBid,
   status,
-  history,
   statistics,
   deploy,
-} from "../controllers/auctionController";
-import { verifyTokenMiddleware } from "../middlewares/authMiddleware";
+  history,
+} from "../controllers/Auction";
 
 const router = express.Router();
 
