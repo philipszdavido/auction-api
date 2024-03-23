@@ -41,7 +41,7 @@ Without this PORT, the default port number will be `3100`.
 You will need to install the dependencies.
 
 ```sh
-yan install
+yarn install
 npm install
 ```
 
