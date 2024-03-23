@@ -217,6 +217,18 @@ curl --location --request POST 'http://localhost:3100/auction/status' \
 --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlvdXJfdXNlcm5hbWUiLCJwYXNzd29yZCI6InlvdXJfcGFzc3dvcmQiLCJpYXQiOjE3MTA5NzQzNTgsImV4cCI6MTcxMDk3Nzk1OH0.pLNeECeud8R0XiCyqjbRlSQ96IYhU5lX2fn_kKE9hR4' \
 ```
 
+- deploy
+
+```sh
+curl --location --request POST 'http://localhost:3100/auction/deploy' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlvdXJfdXNlcm5hbWUiLCJwYXNzd29yZCI6InlvdXJfcGFzc3dvcmQiLCJpYXQiOjE3MTA3NTU5NTEsImV4cCI6MTcxMDc1OTU1MX0.KxnvwG42RQSqTFq0qLVm4ub17jO_IeiyNJR10Z1L6fE' \
+--data-raw '{
+    "endTime": 9000000,
+    "beneficiaryAddress": "0x234RGRGVR"
+}'
+```
+
 # Docker
 
 To build the Docker images, simply run:
@@ -224,3 +236,13 @@ To build the Docker images, simply run:
 ```
 docker-compose up
 ```
+
+We have two containers in the Docker: api,a nd hardhat. The `api` holds the server and the `hardhat` launches a local node.
+
+Deploy the contract locally:
+
+```
+yarn deploy:local
+```
+
+Now, you can call the API endpoints.
