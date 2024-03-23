@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { statistics } from "../../../controllers/auctionController";
+import { statistics } from "../../../controllers/Auction";
 import { statisticsFn } from "../../../auctionContract/statistics";
 
 jest.mock("../../../auctionContract/statistics");

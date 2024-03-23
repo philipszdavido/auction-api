@@ -346,3 +346,23 @@ yarn deploy:local
 ```
 
 Now, you can call the API endpoints.
+
+# Running Tests
+
+First, run:
+
+```sh
+yarn compile
+```
+
+**Unit Test**
+
+```sh
+yarn test:unit
+```
+
+**Integration Test**
+
+```sh
+yarn test:integration
+```

@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { hashPassword } from "../../utils/auth";
 import { create, find } from "../../mock/user.db";
+import {
+  PASSWORD_MIN_LENGTH,
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from "../../utils/constants";
 
-export const USERNAME_MAX_LENGTH = 15;
-export const USERNAME_MIN_LENGTH = 4;
-
-export const PASSWORD_MIN_LENGTH = 4;
 export const isUsernameTooLong = (username: string) => {
   return username.length > USERNAME_MAX_LENGTH;
 };

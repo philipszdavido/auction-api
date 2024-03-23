@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { login } from "../../../controllers/authController";
+import { login } from "../../../controllers/Auth";
 import { find } from "../../../mock/user.db";
 import { comparePassword, signToken } from "../../../utils/auth";
 
