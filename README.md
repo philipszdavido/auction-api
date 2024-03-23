@@ -100,14 +100,14 @@ Make it look like the above, then also add the private keys of accounts you will
 
 Finally, you can start the server:
 
-```
+```sh
 yarn build
 yarn start
 ```
 
 or using nodemon:
 
-```
+```sh
 yarn dev
 ```
 
@@ -134,14 +134,14 @@ Also, in the `accounts`, we included the account key from the `.env` `SIGNER_PRI
 
 Finally, start the server:
 
-```
+```sh
 yarn build
 yarn start
 ```
 
 or
 
-```
+```sh
 yarn dev
 ```
 
@@ -158,6 +158,14 @@ curl --location --request POST 'http://localhost:3100/auth/register' \
     "username": "your_username",
     "password": "your_password"
   }'
+```
+
+Result:
+
+```json
+{
+  "message": "User created"
+}
 ```
 
 - /login
@@ -192,12 +200,38 @@ curl --location --request GET 'http://localhost:3100/auction/history' \
 --data-raw ''
 ```
 
+Result:
+
+```json
+{
+  "message": "Bid history",
+  "data": [
+    {
+      "bidder": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+      "amount": "1.2 ETH"
+    }
+  ]
+}
+```
+
 - statistics
 
 ```sh
 curl --location --request GET 'http://localhost:3100/auction/statistics' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlvdXJfdXNlcm5hbWUiLCJwYXNzd29yZCI6InlvdXJfcGFzc3dvcmQiLCJpYXQiOjE3MTEwOTA3NTksImV4cCI6MTcxMTA5NDM1OX0.fiY8NbQeUJ_vGkFVrZcg0czbdQxl-ymn-sSysQJSwEM'
+```
+
+Result:
+
+```json
+{
+  "message": "Statistics",
+  "data": {
+    "totalBids": "1",
+    "totalEthVolume": "1.2 ETH"
+  }
+}
 ```
 
 - submit-bid
@@ -211,12 +245,65 @@ curl --location --request POST 'http://localhost:3100/auction/submit-bid' \
 }'
 ```
 
+Result:
+
+```json
+{
+  "message": "Bid submitted successfully",
+  "data": {
+    "cumulativeGasUsed": "180545",
+    "logsBloom": "0x00000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000100000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "logs": [
+      {
+        "address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+        "topics": [
+          "0xf4757a49b326036464bec6fe419a4ae38c8a02ce3e68bf0809674f6aab8ad300"
+        ],
+        "data": "0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb9226600000000000000000000000000000000000000000000000010a741a462780000",
+        "transactionHash": "0xcc0579e27230131152625ab24cdf5c5a863186f1cfbf88dd80d63a4ba5a353ff",
+        "blockHash": "0xa5c905597e45251e647ca8be20da5239f935b97488977dd2e894a16cf2e24fd3",
+        "blockNumber": "2",
+        "logIndex": "0",
+        "transactionIndex": "0",
+        "removed": false
+      }
+    ],
+    "status": "1",
+    "type": "0",
+    "transactionHash": "0xcc0579e27230131152625ab24cdf5c5a863186f1cfbf88dd80d63a4ba5a353ff",
+    "transactionIndex": "0",
+    "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "to": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+    "gasUsed": "180545",
+    "effectiveGasPrice": "1000000000",
+    "blockHash": "0xa5c905597e45251e647ca8be20da5239f935b97488977dd2e894a16cf2e24fd3",
+    "blockNumber": "2"
+  }
+}
+```
+
 - status
 
 ```sh
 curl --location --request POST 'http://localhost:3100/auction/status' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlvdXJfdXNlcm5hbWUiLCJwYXNzd29yZCI6InlvdXJfcGFzc3dvcmQiLCJpYXQiOjE3MTA5NzQzNTgsImV4cCI6MTcxMDk3Nzk1OH0.pLNeECeud8R0XiCyqjbRlSQ96IYhU5lX2fn_kKE9hR4' \
+```
+
+Result:
+
+```json
+{
+  "message": "Auction status",
+  "data": {
+    "ended": false,
+    "beneficiary": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "pendingReturns": "0 ETH",
+    "highestBid": "1.2 ETH",
+    "auctionEndTime": "4822-01-15T11:19:42.546Z",
+    "totalBids": 1
+  }
+}
 ```
 
 - deploy
@@ -231,11 +318,22 @@ curl --location --request POST 'http://localhost:3100/auction/deploy' \
 }'
 ```
 
+Result:
+
+```json
+{
+  "message": "Auction smart contract deployed successfully",
+  "data": {
+    "auctionContractAddress": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+  }
+}
+```
+
 # Docker
 
 To build the Docker images, simply run:
 
-```
+```sh
 docker-compose up
 ```
 
@@ -243,7 +341,7 @@ We have two containers in the Docker: api,a nd hardhat. The `api` holds the serv
 
 Deploy the contract locally:
 
-```
+```sh
 yarn deploy:local
 ```
 
