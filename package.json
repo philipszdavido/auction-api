@@ -1,7 +1,7 @@
 {
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx hardhat compile && tsc",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "deploy:infura": "tsc & node dist/src/infura/deploy/index.js",
