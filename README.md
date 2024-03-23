@@ -4,6 +4,8 @@
 
 This project is an Expressjs application and also houses a hardhat project.
 
+First, rename `env.example` to `.env`.
+
 Before you run this application, you an Ethereum wallet addres with some enought ETH on it.
 
 Copy the private key and account address of your eth account, and paste them in the `.env` file in this project:
