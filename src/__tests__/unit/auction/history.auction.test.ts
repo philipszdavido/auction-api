@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { history } from "../../../controllers/auctionController";
 import { bidHistory } from "../../../auctionContract/bidHistory";
+import { history } from "../../../controllers/Auction";
 
 jest.mock("../../../auctionContract/bidHistory");
 

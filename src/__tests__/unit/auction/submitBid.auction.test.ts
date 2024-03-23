@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { submitBid } from "../../../controllers/auctionController";
+import { submitBid } from "../../../controllers/Auction";
 import { submitBid as submitBidAuction } from "../../../auctionContract/submitBid";
 
 jest.mock("../../../auctionContract/submitBid");
