@@ -1,35 +1,37 @@
+import { sql } from "@vercel/postgres";
+
 export interface User {
+  id: number;
   username: string;
   hashPassword: string;
 }
 
-const users: User[] = [
-  {
-    username: "",
-    hashPassword: "",
-  },
-];
-
-export function find(username: string) {
-  return users.find((user) => user.username === username);
+export async function find(username: string) {
+  const { rows } = await sql`SELECT * from USERS where username=${username}`;
+  console.log(rows);
+  return rows[0];
 }
 
-export function create(username: string, hashPassword: string) {
-  if (find(username)) return;
-  users.push({ username, hashPassword });
+export async function create(username: string, hashPassword: string) {
+  if (await find(username)) return;
+
+  await sql`INSERT INTO USERS (username, email, hashPassword)
+  VALUES (${username}, ${hashPassword});  `;
 }
 
-export function update(username: string, hashPassword: string) {
-  const user = users.find((user: User) => user.username === username);
-  if (!user) return;
-  user.hashPassword = hashPassword;
+export async function update(user: User) {
+  await sql`UPDATE USERS
+  SET hashPassword = ${user.hashPassword}, username = ${user.username}
+  WHERE id = ${user.id};
+  `;
 }
 
-export function remove(username: string) {
-  const index = users.findIndex((user) => user.username === username);
-  users.splice(index, 1);
+export async function remove(user: User) {
+  await sql`DELETE FROM USERS
+  WHERE id = ${user.id};
+  `;
 }
 
-export function getAll() {
-  return users;
+export async function getAll() {
+  return await sql`SELECT * FROM USERS`;
 }

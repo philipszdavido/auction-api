@@ -43,7 +43,7 @@ const register = async (req: Request, res: Response) => {
       });
     }
 
-    if (find(username)) {
+    if (await find(username)) {
       return res.status(400).json({ message: "Username is already taken" });
     }
 

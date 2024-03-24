@@ -6,7 +6,7 @@ const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    const user = find(username) as User;
+    const user = (await find(username)) as User;
 
     if (!user) {
       return res.status(400).json({ message: "Invalid username" });
