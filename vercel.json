@@ -6,5 +6,5 @@
     "enabled": true
   },
 
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/src" }]
 }
