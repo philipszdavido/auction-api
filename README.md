@@ -378,3 +378,27 @@ yarn test:unit
 ```sh
 yarn test:integration
 ```
+
+## Testing the SimpleAuction smart contract
+
+Deploy the smart contract, update the `.env` with your:
+
+```
+ACCOUNT_ADDRESS="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+AUCTION_END_TIME="90000000000000"
+BENEFICIARY_ADDRESS="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+CONTRACT_ADDRESS="0x5FbDB2315678afecb367f032d93F642f64180aa3"
+ETHEREUM_NETWORK="http://localhost:8545"
+```
+
+If you are testing on local node, then start the hardhat node:
+
+```sh
+yarn start:node
+```
+
+Run the test:
+
+```sh
+yarn test:contract
+```
