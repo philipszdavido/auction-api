@@ -3,25 +3,24 @@ import { sql } from "@vercel/postgres";
 export interface User {
   id: number;
   username: string;
-  hashPassword: string;
+  hashpassword: string;
 }
 
 export async function find(username: string) {
   const { rows } = await sql`SELECT * from USERS where username=${username}`;
-  console.log(rows);
-  return rows[0];
+  return rows[0] as User;
 }
 
 export async function create(username: string, hashPassword: string) {
   if (await find(username)) return;
 
-  await sql`INSERT INTO USERS (username, email, hashPassword)
+  await sql`INSERT INTO USERS (username, hashPassword)
   VALUES (${username}, ${hashPassword});  `;
 }
 
 export async function update(user: User) {
   await sql`UPDATE USERS
-  SET hashPassword = ${user.hashPassword}, username = ${user.username}
+  SET hashPassword = ${user.hashpassword}, username = ${user.username}
   WHERE id = ${user.id};
   `;
 }
