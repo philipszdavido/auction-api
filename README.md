@@ -1,10 +1,10 @@
 # auction-api
 
-Written in TypeScript
-Framework: Expressjs/Node.js
-DB: Vercel Postgre
-Test: Hardhat and Jest.
-Smart Contract Language: Solidity
+Written in _TypeScript_
+Framework: _Expressjs/Node.js_
+DB: _Vercel Postgre_
+Test: _Hardhat_ and _Jest_.
+Smart Contract Language: _Solidity_
 
 # How to Run Project
 
