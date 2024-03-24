@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { hashPassword } from "../../utils/auth";
-import { create, find } from "../../mock/user.db";
+import { create, find } from "../../db/user.db";
 import {
   PASSWORD_MIN_LENGTH,
   USERNAME_MAX_LENGTH,
@@ -43,7 +43,7 @@ const register = async (req: Request, res: Response) => {
       });
     }
 
-    if (find(username)) {
+    if (await find(username)) {
       return res.status(400).json({ message: "Username is already taken" });
     }
 

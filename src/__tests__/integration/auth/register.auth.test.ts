@@ -1,15 +1,25 @@
 import request from "supertest";
-import { create, find } from "../../../mock/user.db";
+import { create, find } from "../../../db/user.db";
 import { server as app } from "../../..";
 import {
   PASSWORD_MIN_LENGTH,
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from "../../../utils/constants";
+import { hashPassword } from "../../../utils/auth";
 
 afterAll((done) => {
   app.close(done);
 });
+
+jest.mock("../../../db/user.db", () => ({
+  find: jest.fn(),
+  create: jest.fn(),
+}));
+
+jest.mock("../../../utils/auth", () => ({
+  hashPassword: jest.fn(),
+}));
 
 describe("Integration Test: /register endpoint", () => {
   beforeEach(() => {});
@@ -19,6 +29,9 @@ describe("Integration Test: /register endpoint", () => {
       username: "testUser",
       password: "testPassword",
     };
+    (find as jest.Mock).mockReturnValue(false);
+    (create as jest.Mock).mockReturnValue(true);
+    (hashPassword as jest.Mock).mockReturnValue("testPassword");
 
     const response = await request(app)
       .post("/auth/register")
@@ -32,6 +45,7 @@ describe("Integration Test: /register endpoint", () => {
   });
 
   it("should return 400 if username is already taken", async () => {
+    (find as jest.Mock).mockReturnValue(true);
     const existingUser = { username: "existingUser", password: "password" };
     create(existingUser.username, existingUser.password);
 

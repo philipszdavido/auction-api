@@ -1,4 +1,4 @@
-import { User, find } from "../../mock/user.db";
+import { User, find } from "../../db/user.db";
 import { comparePassword, signToken } from "../../utils/auth";
 import { Request, Response } from "express";
 
@@ -6,13 +6,13 @@ const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    const user = find(username) as User;
+    const user = (await find(username)) as User;
 
     if (!user) {
       return res.status(400).json({ message: "Invalid username" });
     }
 
-    const passwordMatch = await comparePassword(password, user.hashPassword);
+    const passwordMatch = await comparePassword(password, user.hashpassword);
 
     if (!passwordMatch) {
       return res.status(400).json({ message: "Wrong password" });

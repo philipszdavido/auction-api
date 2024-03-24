@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { login } from "../../../controllers/Auth";
-import { find } from "../../../mock/user.db";
+import { find } from "../../../db/user.db";
 import { comparePassword, signToken } from "../../../utils/auth";
 
-jest.mock("../../../mock/user.db", () => ({
+jest.mock("../../../db/user.db", () => ({
   find: jest.fn(),
 }));
 
@@ -29,7 +29,7 @@ describe("Authentication Unit Test - Login", () => {
   });
 
   it("should successfully login a user", async () => {
-    const user = { username: "John", hashPassword: "hashedPassword" };
+    const user = { username: "John", hashpassword: "hashedPassword" };
 
     (find as jest.Mock).mockReturnValue(user);
 
@@ -71,7 +71,7 @@ describe("Authentication Unit Test - Login", () => {
   });
 
   it("should return error if password is wrong", async () => {
-    const user = { username: "John", hashPassword: "hashedPassword" };
+    const user = { username: "John", hashpassword: "hashedPassword" };
 
     (find as jest.Mock).mockReturnValue(user);
 

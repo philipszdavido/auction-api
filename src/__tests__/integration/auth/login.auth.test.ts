@@ -1,9 +1,9 @@
 import request from "supertest";
 import { server as app } from "../../..";
 import { comparePassword, signToken } from "../../../utils/auth";
-import { User, find } from "../../../mock/user.db";
+import { User, find } from "../../../db/user.db";
 
-jest.mock("../../../mock/user.db");
+jest.mock("../../../db/user.db");
 jest.mock("../../../utils/auth");
 
 afterAll((done) => {
@@ -14,7 +14,7 @@ describe("POST /auth/login", () => {
   it("should login successfully with correct username and password", async () => {
     const mockUser = {
       username: "testuser",
-      hashedPassword: "hashedPassword123",
+      hashpassword: "hashedPassword123",
     };
     (find as jest.Mock).mockReturnValueOnce(mockUser);
     (comparePassword as jest.Mock).mockReturnValueOnce(true);
@@ -51,7 +51,7 @@ describe("POST /auth/login", () => {
   it("should return 400 if password is incorrect", async () => {
     const mockUser = {
       username: "testuser",
-      hashedPassword: "hashedPassword123",
+      hashpassword: "hashedPassword123",
     };
     (find as jest.Mock).mockReturnValueOnce(mockUser);
     (comparePassword as jest.Mock).mockReturnValueOnce(false);

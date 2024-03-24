@@ -1,5 +1,11 @@
 # auction-api
 
+Written in _TypeScript_
+Framework: _Expressjs/Node.js_
+DB: _Vercel Postgre_
+Test: _Hardhat_ and _Jest_.
+Smart Contract Language: _Solidity_
+
 # How to Run Project
 
 This project is an Expressjs application and also houses a hardhat project.
@@ -353,6 +359,12 @@ First, run:
 
 ```sh
 yarn compile
+```
+
+**All Test**
+
+```sh
+yarn test
 ```
 
 **Unit Test**
