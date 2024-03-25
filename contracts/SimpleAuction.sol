@@ -32,10 +32,13 @@ contract SimpleAuction {
         uint amount;
     }
 
+    // Holds all bid history
     Bid[] public history;
 
+    // Holds total bids
     uint public totalBids;
 
+    // Holds the total ETH bidded
     uint public totalEthVolume;
 
     // Flag to indicate if the auction has ended
@@ -110,6 +113,7 @@ contract SimpleAuction {
         beneficiary.transfer(highestBid);
     }
 
+    // Function to return AuctionStatus
     function getStatus() public view returns (AuctionStatus memory) {
         return AuctionStatus(
             auctionEndTime,
@@ -122,14 +126,17 @@ contract SimpleAuction {
         );
     }
 
+    // Function to return bid history
     function getBidHistory() public view returns (Bid[] memory) {
         return history;
     }
 
+    // Function to return total bids
     function getTotalBids() public view returns (uint) {
         return totalBids;
     }
 
+    // Function to return total ETH Volume
     function getEthVolume() public view returns (uint) {
         return totalEthVolume;
     }
